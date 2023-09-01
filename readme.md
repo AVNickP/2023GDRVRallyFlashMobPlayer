@@ -5,34 +5,40 @@ This a the Q-SYS design an L-Acoustics Network Manager files for the Grand Desig
 ## Signal Flow
 Software Dante was used as the primary transport of audio in this system. Thr core handled all mixing and playback functionality, while all system tuning and calibration was done in Network Manager and run on the LA4X Amplified Controller.
 
-`
-                                         QSC-NV-32-H
-                                       _______________
-UHF/UHF ANtenna ----> Icom IC-705 ---->| USB         |
-                                       |             |
-                 Shure ULX-P  -------->| Analog IN   |
-                                       |             |
-                                -------| LAN A       |
-                                |      |_____________|
-                                |
-                                |      Network Switch
-                                |      _______________
-                                |______|             |
-                                       |             |
-Playback iPad ----> Dante AVIO USB --->|             |
-             ------------------------->|             |
-            |                          |_____________|
-            |
-            |
-            |                          L'Acoustics LA4X
-            |                          _______________
-             --->Dante AVIO AES3 ----->| AES A/B   1 | ----> SYVA SUB
-                                       |           2 | ----> SYVA SUB
-                                       |           3 | ----> SYVA SUB
-                                       |           4 | ----> X8 ---> X8
-                                       |_____________|
-
-`
+```
+                                              QSYS NV-32-H
+                                             ┌────────────┐
+UHF/VHF Antenna ─────► ICOM IC-705 ─────────►│USB         │
+                                             │            │
+Shure ULX-P ────────────────────────────────►│ANALOG      │
+                                             │            │
+                                     ┌───────┤LAN         │
+                                     │       │            │
+                                     │       └────────────┘
+                                     │
+                                     │
+                                     │        POE Switch
+                                     │       ┌────────────┐
+                                     └───────┤            │
+                                             │            │
+Playback iPad ──────►Dante AVIO USB ────────►│            │
+                                             │            │
+     ┌───────────────────────────────────────┤            │
+     │                                       │            │
+     │                                  ┌────┤            │
+     │                                  │    └────────────┘
+     │                                  │
+     │                                  │    L'Acoustics LA4X
+     │                                  │    ┌────────────┐
+     │                                  └────┤Control    1├───────►SYVA SUB
+     │                                       │            │
+     └─────Dante AVIO AES3──────────────────►│AES A/B    2├───────►SYVA SUB
+                                             │            │
+                                             │           3├──────► SYVA SUB
+                                             │            │
+                                             │           4├───►X8────►X8
+                                             └────────────┘
+```
 
 ## Flash Mob Playback
 We need a way to trigger the playback of the track for the flash mob without depending on internet connectivity, as connectivity was unreliable at the fairgrounds. To overcome this I ended up doing a couple things:
